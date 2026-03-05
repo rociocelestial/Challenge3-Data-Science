@@ -22,53 +22,111 @@ La empresa quiere anticiparse al problema de la cancelación, y te corresponde a
 
 * Crear una conclusión estratégica señalando los principales factores que influyen en la cancelación.
 
+# 📡 Telecom X: Predicción de Churn (Parte 2)
 
-# 📡 Proyecto TelecomX - Parte 2 : Predicción de Churn con Machine Learning
+Este proyecto forma parte de un análisis avanzado de ciencia de datos enfocado en la retención de clientes para la empresa de telecomunicaciones **Telecom X**. El objetivo principal es construir un modelo predictivo capaz de determinar la probabilidad de que un cliente cancele su servicio (**Churn**) basándose en variables clave del negocio. 📉
 
-¡Bienvenido! Este proyecto aplica ciencia de datos para resolver uno de los problemas más críticos en las telecomunicaciones: la **fuga de clientes** (Churn). 
+## 🛠️ Tecnologías Utilizadas
+Para este análisis y modelado, se emplearon las siguientes herramientas del ecosistema de Data Science:
 
-## 🎯 Objetivo
-Identificar proactivamente a los clientes con mayor riesgo de abandonar la compañía para implementar estrategias de retención efectivas y salvar la rentabilidad del negocio.
-
----
-
-## 🛠️ Herramientas Utilizadas
-* **Lenguaje:** Python 🐍
-* **Entorno:** Google Colab 🚀
-* **Librerías:** Pandas, Matplotlib, Seaborn, Scikit-learn.
-* **Modelos:** Regresión Logística, Árbol de Decisión y Random Forest.
+* **Lenguaje:** ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+* **Manipulación de Datos:** ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
+* **Visualización:** ![Matplotlib](https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black) ![Seaborn](https://img.shields.io/badge/Seaborn-blue?style=for-the-badge&logo=Seaborn&logoColor=white)
+* **Machine Learning:** ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
+* **Entorno:** ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%23FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white) ![Google Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)
 
 ---
 
-## 📈 Lo que se hizo (Paso a Paso)
-
-1. **Análisis de Datos (EDA):** Exploramos una base de +7,000 clientes, detectando que el 26% se había fugado. 🔍
-2. **Preprocesamiento:** Limpiamos los datos y convertimos variables categóricas para que los modelos pudieran entenderlas. ⚙️
-3. **Entrenamiento de Modelos:** Probamos 3 algoritmos distintos para encontrar el más preciso. 🤖
-4. **Evaluación:** Usamos matrices de confusión y métricas de **Recall** para elegir el modelo ganador. ✅
-
----
-
-## 🏆 El Ganador: Regresión Logística
-Elegimos este modelo porque logró un **Recall de 0.79**. 
-> **¿Qué significa esto?** Que logramos detectar a **8 de cada 10 clientes** antes de que se vayan. ¡Es el modelo que más dinero le ahorra a la empresa! 💰
+## 1. 🎯 Propósito del Proyecto
+El abandono de clientes es uno de los desafíos más costosos en el sector de las telecomunicaciones. Este análisis busca:
+* **Predecir el Churn:** Identificar a los usuarios con mayor riesgo de salida antes de que suceda. ⚠️
+* **Identificar Variables Clave:** Entender qué factores (tipo de contrato, cargos mensuales, servicios adicionales) influyen directamente en la decisión del cliente. 🔍
+* **Acción Proactiva:** Proporcionar una base sólida para que el equipo de marketing diseñe estrategias de fidelización personalizadas. 💡
 
 ---
 
-## 💡 Hallazgos y Estrategia
-El análisis reveló que los clientes se van principalmente por:
-* 📑 **Contratos mes a mes:** Son muy inestables.
-* 💸 **Facturas altas:** Existe un límite crítico de **$93.67**.
-* 🌐 **Servicio de Fibra:** Presenta puntos de fricción que debemos mejorar.
+## 2. 📂 Estructura del Proyecto
+```
+TelecomX_Churn_Analysis/
+├── 📁 data/
+│   ├── raw_telecom_data.csv       # Datos originales
+│   └── processed_telecom.csv      # Datos limpios y codificados para el modelo
+├── 📁 notebooks/
+│   └── TelecomX_Parte2_Model.ipynb # Cuaderno principal con el análisis y modelado
+├── 📁 reports/
+│   └── 🖼️ figures/                # Gráficos e insights exportados (Matplotlib/Seaborn)
+├── 📄 requirements.txt            # Librerías necesarias para ejecutar el proyecto
+└── 📄 README.md                   # Documentación del proyecto
 
-### 🚀 Plan de Acción:
-* **Migración:** Incentivar el paso a contratos anuales con meses de regalo. 🎁
-* **Escuadrón de Retención:** Contactar a quienes superen los $93 de factura antes de que se quejen. 📞
-* **Plan de Bienvenida:** Premiar la lealtad de los clientes nuevos al cumplir 6 meses. 🌟
+
+```
+
+
+---
+## 3. ⚙️ Preparación de los Datos y Modelado
+El proceso de preparación fue fundamental para garantizar la calidad de las predicciones:
+
+**📊 Clasificación de Variables**
+* **Variables Categóricas:** Género, tipo de contrato, método de pago y servicios (DSL/Fibra). 🗂️
+
+* **Variables Numéricas:** Tenencia (meses), cargos mensuales y cargos totales. 🔢
+
+### 🛠️ Ingeniería de Características (Preprocessing)
+* **Codificación:** Transformación de variables cualitativas a formatos numéricos procesables. 💻
+
+* **Normalización:** Escalado de datos numéricos para asegurar que la Regresión Logística converja sin sesgos por magnitud. ⚖️
+
+* **División de Datos:** Separación estricta de 80% para entrenamiento y 20% para prueba (train/test split). ✂️
+
+### 🧠 Algoritmo Seleccionado: Regresión Logística
+Se seleccionó la **Regresión Logística** como el modelo final. A diferencia de otros algoritmos complejos, permite una interpretación clara de los coeficientes, facilitando al negocio entender exactamente qué variables pesan más en la decisión de abandono de un cliente. 📈
+
+---
+## 4. 📈 Insights y Visualizaciones (EDA)
+Durante el Análisis Exploratorio de Datos (EDA), se obtuvieron los siguientes hallazgos:
+
+* **Factor de Permanencia:** Los clientes en sus primeros 6 meses presentan la mayor vulnerabilidad de abandono. ⏳
+
+* **Tipo de Contrato:** Los contratos mes a mes tienen un Churn significativamente más alto que los anuales. 📅
+
+* **Cargos Mensuales:** Se observó una correlación directa: a mayores cargos mensuales, aumenta la probabilidad de cancelación. 💰
 
 ---
 
+## 5. 📊 Evaluación del Modelo
+El desempeño final del modelo de Regresión Logística basado en el reporte de clasificación es:
+
+| Métrica | Clase "No" (Fieles) | Clase "Yes" (Churn) | General (Accuracy) |
+| :--- | :---: | :---: | :---: |
+| **Precision** | 0.91 | 0.51 | **0.74** ✅ |
+| **Recall** | 0.73 | **0.79** 🔔 | |
+| **F1-Score** | 0.81 | 0.62 | |
+
+---
+
+**Nota sobre el desempeño:** Se destaca el Recall de 0.79 para la clase "Yes". Esto indica que el modelo es capaz de capturar al 79% de los clientes que realmente abandonarán, permitiendo a Telecom X tomar medidas preventivas sobre la gran mayoría de los casos de riesgo.
+
+---
+
+## 🚀 Instrucciones de Ejecución
+
+### 📋 Requisitos Previos
+Asegúrate de tener instaladas las siguientes librerías:
+
+Bash
+
+pip install pandas matplotlib seaborn scikit-learn
+
+### 💻 Pasos para Ejecutar
+
+Clona el repositorio y verifica que el archivo processed_telecom.csv esté en la carpeta data/. 📥
+
+Abre el cuaderno TelecomX_Parte2_Model.ipynb en VS Code o Google Colab. 📒
+
+Ejecuta las celdas secuencialmente para entrenar el modelo y visualizar la Matriz de Confusión. ▶️
 
 
 
-*¡Gracias por revisar mi proyecto! Si tienes alguna duda o sugerencia, no dudes en contactarme.* 😊
+
+
+
